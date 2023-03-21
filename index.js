@@ -1,7 +1,8 @@
 const http = require('http');
 const fs = require('fs');
-// const router = require("./src/controller/router");
-// const error = require("./src/controller/handle/notFoundRouter");
+const router = require("./src/controller/router");
+const error = require("./src/controller/handle/notFoundRouter");
+const userService = require("./src/service/userService");
 const typeFile = {
     'jpg': 'images/jpg',
     'png': 'images/png',
@@ -34,8 +35,16 @@ let server = http.createServer((req, res) => {
     //     }
     //     chosenHandle(req, res);
     // }
-    res.write('Ling');
-    res.end()
+    fs.readFile('./src/views/index.html', 'utf-8', async (err, indexHtml) => {
+        if (err) {
+            console.log(err);
+        } else {
+            let users = await userService.getUsers();
+            res.writeHead(200, 'text/html');
+            res.write(indexHtml);
+            res.end();
+        }
+    })
 });
 
 server.listen(8080)
