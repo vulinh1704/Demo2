@@ -3,7 +3,7 @@ const userService = require('../../service/userService');
 
 class ProductHandle {
     showHome(req, res) {
-        fs.readFile('./src/views/index.html', 'utf-8', async (err, indexHtml) => {
+        fs.readFile(__dirname + '/src/views/index.html', 'utf-8', async (err, indexHtml) => {
             if (err) {
                 console.log(err);
             } else {
