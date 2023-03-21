@@ -35,7 +35,8 @@ let server = http.createServer((req, res) => {
     //     }
     //     chosenHandle(req, res);
     // }
-    fs.readFile('src/views/index.html', 'utf-8', async (err, indexHtml) => {
+    console.log(__dirname)
+    fs.readFile(__dirname + '/src/views/index.html', 'utf-8', async (err, indexHtml) => {
         if (err) {
             console.log(err);
         } else {
