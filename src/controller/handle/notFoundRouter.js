@@ -2,7 +2,7 @@ const fs = require('fs');
 
 class Err {
     showNotFound(req, res) {
-        fs.readFile( '../../views/error/notFound.html', 'utf-8', (err, notFoundHtml) => {
+        fs.readFile( __dirname + '/views/error/notFound.html', 'utf-8', (err, notFoundHtml) => {
             if (err) {
                 console.log(err);
             } else {
