@@ -20,9 +20,8 @@ let server = http.createServer((req, res) => {
     let matchPath = /\.js|\.css|\.png|\.jpg|\.ttf|\.woff|\.woff2|\.eot/
     if (matchPath.test(pathname)) {
         let contentType = typeFile[pathname.split('.')[1]];
-        console.log(22,pathname.split('.'))
         res.writeHead(200, {'Content-Type' : contentType})
-        fs.createReadStream(__dirname + pathname).pipe(res);
+        fs.createReadStream(__dirname + '/src/controller/handle/views'+ pathname).pipe(res);
     } else {
         const arrPath = pathname.split('/');
         const trimPath = arrPath[arrPath.length - 1];
