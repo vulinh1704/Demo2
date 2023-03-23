@@ -7,13 +7,14 @@ class ProductHandle {
             if (err) {
                 console.log(err);
             } else {
-                let users = await userService.getUsers();
                 res.writeHead(200, 'text/html');
                 res.write(indexHtml);
                 res.end();
             }
         })
     }
+
+
 }
 
 module.exports = new ProductHandle();

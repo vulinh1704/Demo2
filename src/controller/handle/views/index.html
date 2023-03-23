@@ -15,13 +15,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title>Ning</title>
 </head>
 <style>
     .form-login {
-        -webkit-box-shadow: 5px 3px 29px -7px rgba(0,0,0,0.48);
-        -moz-box-shadow: 5px 3px 29px -7px rgba(0,0,0,0.48);
-        box-shadow: 5px 3px 29px -7px rgba(0,0,0,0.48);
+        -webkit-box-shadow: 5px 3px 29px -7px rgba(0, 0, 0, 0.48);
+        -moz-box-shadow: 5px 3px 29px -7px rgba(0, 0, 0, 0.48);
+        box-shadow: 5px 3px 29px -7px rgba(0, 0, 0, 0.48);
         background-color: white;
         width: 396px;
         border-radius: 10px;
@@ -49,7 +52,7 @@
     .btn-login {
         height: 52px;
         width: 100%;
-        font-size: 20px ;
+        font-size: 20px;
         line-height: 48px;
         color: white;
         background-color: #007bff;
@@ -67,6 +70,7 @@
         margin-top: 20px;
         display: inline-block;
     }
+
     #btn-create {
         background-color: #42b72a;
         height: 52px;
@@ -79,6 +83,34 @@
         font-size: 17px;
         line-height: 48px;
     }
+
+    .sign-up {
+        font-size: 12px;
+        line-height: 20px;
+        color: #606770;
+        font-weight: 400;
+    }
+
+    .note {
+        font-size: 11px;
+        line-height: 15px;
+        color: #777777;
+        font-weight: 400;
+    }
+
+    .btn-register {
+        background-color: #42b72a;
+        font-size: 18px;
+        line-height: 23px;
+        font-weight: 700;
+        color: white;
+        border: none;
+        width: 194px;
+        height: 36px;
+        border-radius: 8px;
+        margin-left: 29%;
+    }
+
 </style>
 <body>
 <div class="container">
@@ -94,19 +126,136 @@
             <div class="form-login p-3">
                 <form>
                     <div class="form-group">
-                        <input type="email" class="form-control input-login" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address or phone number">
+                        <input type="email" class="form-control input-login" id="exampleInputEmail1"
+                               aria-describedby="emailHelp" placeholder="Email address or phone number">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control input-login" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" class="form-control input-login" id="exampleInputPassword1"
+                               placeholder="Password">
                     </div>
                     <button type="submit" class="btn-login">Log in</button>
                 </form>
                 <a href="" class="a-forgot">Forgotten password?</a>
                 <hr>
-                <button id="btn-create">Create new account</button>
+                <button id="btn-create" data-toggle="modal" data-target="#exampleModal">Create new account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Sign Up</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="First name">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Last name">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Mobile phone or Email">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <lable class="sign-up">Date of birth <i class="fa-solid fa-circle-question"></i></lable>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <select class="custom-select" id="days" name="day"></select>
+                        </div>
+                        <div class="col">
+                            <select class="custom-select" id="month" name="month">
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="custom-select" id="year" name="year">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <lable class="sign-up">Gender <i class="fa-solid fa-circle-question"></i></lable>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-control"><lable>Female</lable><input type="radio" value="Female" name="sex" style="margin-left: 30%; margin-top: 6%"></div>
+                        </div>
+                        <div class="col">
+                            <div class="form-control"><lable>Male</lable><input type="radio" value="male" name="sex" style="margin-left: 30%; margin-top: 6%"></div>
+                        </div>
+                        <div class="col">
+                            <div class="form-control"><lable>Bede</lable><input type="radio" value="Bede" name="sex" style="margin-left: 30%; margin-top: 6%"></div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <p class="note">People who use our service may have uploaded your contact information to
+                                Facebook. Learn more.</p>
+                            <p class="note">By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies
+                                Policy. You may receive SMS notifications from us and can opt out at any time.</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-register">Save changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
             </div>
         </div>
     </div>
 </div>
 </body>
+<script>
+    const date = new Date();
+
+    function getDaysInMonth() {
+        let days = new Date(date.getFullYear(), date.getFullYear(), 0).getDate();
+        let dayNow = +(date.getDate())
+        let html = `<option selected value="${dayNow}">${dayNow}</option>`
+        for (let i = 1; i <= +days; i++) {
+            html += `<option value="${i}">${i}</option>`
+        }
+        document.getElementById('days').innerHTML = html;
+    }
+
+    function getMonth() {
+        let month = date.getMonth() + 1;
+        let html = `<option selected value="${month}">${month}</option>`
+        for (let i = 1; i <= 12; i++) {
+           html +=  `<option value="${i}">${i}</option>`
+        }
+        document.getElementById('month').innerHTML = html;
+    }
+    function getYear() {
+        let year = date.getFullYear();
+        let html = `<option selected value="${year}">${year}</option>`
+        for (let i = 1905; i <= +year; i++) {
+            html +=  `<option value="${i}">${i}</option>`
+        }
+        document.getElementById('year').innerHTML = html;
+    }
+
+    getDaysInMonth()
+    getMonth()
+    getYear()
+</script>
 </html>

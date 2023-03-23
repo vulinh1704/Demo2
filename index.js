@@ -2,7 +2,6 @@ const http = require('http');
 const fs = require('fs');
 const router = require("./src/controller/router");
 const error = require("./src/controller/handle/notFoundRouter");
-const userService = require("./src/service/userService");
 const typeFile = {
     'jpg': 'images/jpg',
     'png': 'images/png',
@@ -16,23 +15,28 @@ const typeFile = {
 }
 
 let server = http.createServer((req, res) => {
-    let pathname = req.url;
-    let matchPath = /\.js|\.css|\.png|\.jpg|\.ttf|\.woff|\.woff2|\.eot/
-    if (matchPath.test(pathname)) {
-        let contentType = typeFile[pathname.split('.')[1]];
-        res.writeHead(200, {'Content-Type' : contentType})
-        fs.createReadStream(__dirname + '/src/controller/handle/views'+ pathname).pipe(res);
-    } else {
-        const arrPath = pathname.split('/');
-        const trimPath = arrPath[arrPath.length - 1];
-        console.log(trimPath)
-        let chosenHandle;
-        if (typeof router[trimPath] === 'undefined') {
-            chosenHandle = error.showNotFound;
+    try {
+        let pathname = req.url;
+        let matchPath = /\.js|\.css|\.png|\.jpg|\.ttf|\.woff|\.woff2|\.eot/
+        if (matchPath.test(pathname)) {
+            let contentType = typeFile[pathname.split('.')[1]];
+            res.writeHead(200, {'Content-Type' : contentType})
+            fs.createReadStream(__dirname + '/src/controller/handle/views'+ pathname).pipe(res);
         } else {
-            chosenHandle = router[trimPath];
+            const arrPath = pathname.split('/');
+            const trimPath = arrPath[arrPath.length - 1];
+            console.log(trimPath)
+            let chosenHandle;
+            if (typeof router[trimPath] === 'undefined') {
+                chosenHandle = error.showNotFound;
+            } else {
+                chosenHandle = router[trimPath];
+            }
+            chosenHandle(req, res);
         }
-        chosenHandle(req, res);
+    } catch (e) {
+        res.write(500 + '\n' + e);
+        res.end();
     }
 });
 
