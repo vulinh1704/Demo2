@@ -2,14 +2,34 @@ const connection = require('../model/connection');
 connection.connection();
 
 class UserService {
+    connect
+
+    constructor() {
+        this.connect = connection.getConnection();
+    }
+
     getUsers() {
-        let connect = connection.getConnection();
         return new Promise((resolve, reject) => {
-            connect.query('select * from users', (err, users) => {
+            this.connect.query('select * from users', (err, users) => {
                 if (err) {
                     reject(err)
                 } else {
                     resolve(users)
+                }
+            })
+        })
+    }
+
+    addUser(user) {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`insert into users(name, password, sex, email, date_of_birth)
+                                values ('${user.lastname + ' ' + user.firstname}', '${user.password}',
+                                        '${user.sex}', '${user.phone}',
+                                        '${user.year + "-" + user.month + '-' + user.day}')`, (err, data) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(data);
                 }
             })
         })

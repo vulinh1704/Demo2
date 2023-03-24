@@ -3,7 +3,7 @@ const userService = require('../../service/userService');
 let qs = require('qs')
 
 class ProductHandle {
-    showHome(req, res) {
+    showHome = (req, res) => {
         if (req.method === 'GET') {
             fs.readFile(__dirname + '/views/index.html', 'utf-8', async (err, indexHtml) => {
                 if (err) {
@@ -15,24 +15,23 @@ class ProductHandle {
                 }
             })
         } else {
-            (() => {
-                this.addUser();
-            })();
+            this.addUser(req, res);
         }
     }
 
-    addUser(req, res) {
-        // console.log(1)
-        // let data = ''
-        // req.on('data', chunk => {
-        //     data += chunk;
-        // })
-        // req.on('end', () => {
-        //     let user = qs.parse(data);
-        //     console.log(user);
-        //     res.write('Thành công');
-        //     res.end();
-        // })
+    addUser = (req, res) => {
+        let data = ''
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', () => {
+            let user = qs.parse(data);
+            userService.addUser(user).then(() => {
+                res.writeHead(301, {location: '/'});
+                res.end();
+            })
+
+        })
     }
 
 }
