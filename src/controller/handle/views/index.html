@@ -119,6 +119,10 @@
         border-color: #ddd;
         border-color: rgba(221, 221, 221, 0.85);
     }
+    .nofi {
+        margin-top: 13%;
+        margin-left: 80%
+    }
 </style>
 <body>
 <div class="container">
@@ -132,14 +136,15 @@
         </div>
         <div class="col-5">
             <div class="form-login p-3">
-                <form>
+                <form method="post">
                     <div class="form-group">
-                        <input type="email" class="form-control input-login" id="exampleInputEmail1"
+                        <input type="email" name="email" class="form-control input-login" id="exampleInputEmail1"
                                aria-describedby="emailHelp" placeholder="Email address or phone number">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control input-login" id="exampleInputPassword1"
+                        <input type="password" name="password" class="form-control input-login" id="exampleInputPassword1"
                                placeholder="Password">
+                        <input type="hidden" name="typeForm" value="login">
                     </div>
                     <button type="submit" class="btn-login">Log in</button>
                 </form>
@@ -151,6 +156,7 @@
     </div>
 
     <!--{NofiSuccess}-->
+    <!--{NofiLoginError}-->
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -226,6 +232,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="typeForm" value="register">
                     <div class="row mt-3">
                         <div class="col">
                             <p class="note">People who use our service may have uploaded your contact information to
@@ -283,6 +290,16 @@
             document.getElementById('nofi').innerHTML = ``
         }, 2000)
     }
+
+    function showError() {
+        setTimeout(() => {
+            document.getElementById('login-error').innerHTML = ``
+        }, 2000)
+    }
+
+
     //call showAlert
+    //call showError
+    //https://www.bootdey.com/snippets/view/notifications-panel#html
 </script>
 </html>

@@ -20,19 +20,26 @@ let server = http.createServer((req, res) => {
         let matchPath = /\.js|\.css|\.png|\.jpg|\.ttf|\.woff|\.woff2|\.eot/
         if (matchPath.test(pathname)) {
             let contentType = typeFile[pathname.split('.')[1]];
-            res.writeHead(200, {'Content-Type' : contentType})
-            fs.createReadStream(__dirname + '/src/controller/handle/views'+ pathname).pipe(res);
+            res.writeHead(200, {'Content-Type': contentType})
+            fs.createReadStream(__dirname + '/src/controller/handle/views' + pathname).pipe(res);
         } else {
             const arrPath = pathname.split('/');
-            const trimPath = arrPath[arrPath.length - 1];
-            console.log(trimPath)
+            let trimPath = '';
+            let id = ''
+            if (arrPath.length > 2) {
+                trimPath = arrPath[arrPath.length - 2];
+                id = arrPath[arrPath.length - 1];
+            }
+            if (arrPath.length <= 2) {
+                trimPath = arrPath[arrPath.length - 1];
+            }
             let chosenHandle;
             if (typeof router[trimPath] === 'undefined') {
                 chosenHandle = error.showNotFound;
             } else {
                 chosenHandle = router[trimPath];
             }
-            chosenHandle(req, res);
+            chosenHandle(req, res, id);
         }
     } catch (e) {
         res.write(500 + '\n' + e);

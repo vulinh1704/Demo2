@@ -34,6 +34,18 @@ class UserService {
             })
         })
     }
+
+    checkUser(user) {
+        return new Promise((resolve, reject) => {
+            this.connect.query(`select * from users where email = '${user.email}' and password = '${user.password}'`, (err, data) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(data)
+                }
+            })
+        })
+    }
 }
 
 module.exports = new UserService();
